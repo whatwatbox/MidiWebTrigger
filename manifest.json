@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "MIDI WebTrigger",
+  "description": "clusterのwebトリガーをMidiデバイスで操作できるようになります。",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "version": "0.0.0",
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": [
+        "classes/MidiMap.js",
+        "classes/MidiDevice.js",
+        "classes/TriggerButton.js",
+
+        "midiDevices/APCMiniMK2.js",
+        "midiDevices/Launchpad Mini MK3.js",
+        "midiDevices/OtherDevice.js",
+
+        "midiTrigger.js"
+      ]
+    }
+  ],
+  "permissions": ["activeTab"]
+}
