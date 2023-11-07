@@ -4,6 +4,10 @@ clusterのトリガー操作画面にMidi制御設定を追加します。
 
 ## 導入方法
 
+![DownloadZip](images/downloadZip.png)
+
+<>Code → Download ZIPからファイルをダウンロードし、適当な場所に展開します。
+
 ![説明](images/devmode.png)
 
 Chromeの拡張機能ページ（[chrome://extensions/](chrome://extensions/)）で、デベロッパーモードを有効にして、パッケージ化されていない拡張機能を読み込むを選択します。
