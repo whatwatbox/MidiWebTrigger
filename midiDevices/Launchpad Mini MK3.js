@@ -1,4 +1,7 @@
 class LaunchpadMiniMK3 extends MidiDevice {
+    static inputName = "MIDIIN2 (LPMiniMK3 MIDI)";
+    static outputName = "MIDIOUT2 (LPMiniMK3 MIDI)";
+
     constructor(midiInput, midiOutput, onMidiInput) {
         super("Launchpad Mini MK3", midiInput, midiOutput, onMidiInput);
     }

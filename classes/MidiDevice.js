@@ -1,5 +1,4 @@
 class MidiDevice {
-
     constructor(name, midiInput, midiOutput, onMidiInput) {
         this.name = name;
         this.midiInput = midiInput;
@@ -7,6 +6,14 @@ class MidiDevice {
         this.onMidiInput = onMidiInput;
 
         this.midiInput.onmidimessage = this.onMidiMessage.bind(this);
+    }
+
+    //inputNameとoutputNameが一致するかどうかを返す
+    static isMatch(inputName, outputName) {
+        if(this.inputName === undefined || this.outputName === undefined)
+            throw new Error("inputNameかoutputNameが定義されていません。");
+
+        return this.inputName === inputName && this.outputName === outputName;
     }
 
     //Midiデバイスを取得する
@@ -18,13 +25,11 @@ class MidiDevice {
 
         inputs.forEach(input => {
             outputs.forEach(output => {
-                if (input.name === output.name) {
-                    const midiDevice = MidiDeviceFactory.create(input.name, input, output);
-                    if (midiDevice === null) {
-                        return;
-                    }
-                    midiDeviceList.push(midiDevice);
+                const midiDevice = MidiDeviceFactory.create(input.name, output.name, input, output);
+                if (midiDevice === null) {
+                    return;
                 }
+                midiDeviceList.push(midiDevice);
             });
         });
         return midiDeviceList;
@@ -104,18 +109,18 @@ class MidiDevice {
 //Midiデバイスを作成する
 class MidiDeviceFactory
 {
-    static create(name, midiInput, midiOutput)
+    static create(inputName, outputName, midiInput, midiOutput)
     {
-        switch(name)
-        {
-            case "APC mini mk2":
-                //APCMiniMK2のインスタンスを作成する
-                return new APCMiniMK2(midiInput, midiOutput);
-            case "Launchpad Mini MK3":
-                return new LaunchpadMiniMK3(midiInput, midiOutput);
-            default:
-                return new OtherDevice(name, midiInput, midiOutput);
-        }
+        if(APCMiniMK2.isMatch(inputName, outputName))
+            return new APCMiniMK2(midiInput, midiOutput);
+
+        if(LaunchpadMiniMK3.isMatch(inputName, outputName))
+            return new LaunchpadMiniMK3(midiInput, midiOutput);
+
+        if(inputName === outputName)
+            return new OtherDevice(inputName, midiInput, midiOutput);
+
+        return null;
     }
 }
 

@@ -1,4 +1,7 @@
 class APCMiniMK2 extends MidiDevice {
+    static inputName = "APC mini mk2";
+    static outputName = "APC mini mk2";
+
     constructor(midiInput, midiOutput, onMidiInput) {
         super("APC mini mk2", midiInput, midiOutput, onMidiInput);
     }

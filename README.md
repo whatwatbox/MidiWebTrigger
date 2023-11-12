@@ -16,8 +16,6 @@ Chromeの拡張機能ページ（[chrome://extensions/](chrome://extensions/)）
 
 ![スクリーンショット](images/screenShot.png)
 
-## 操作方法
-
 - デバイス選択：対象のデバイスを選択します。
 - 割当解除
     - 割当解除モード：有効にした状態でPadを選択すると、その割当を解除します。

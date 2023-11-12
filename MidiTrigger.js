@@ -218,7 +218,7 @@ function onDropdownListChange(event) {
             targetDropdownList.innerHTML = "";
 
             //ドロップダウンリストに選択肢を追加する
-            midiDeviceList.forEach((midiDevice) => {
+            midiDevices.forEach((midiDevice) => {
                 const option = document.createElement("option");
                 option.value = midiDevice.name;
                 option.textContent = midiDevice.name;
@@ -396,7 +396,7 @@ function updateButtonColor() {
     //triggerButtonsがない場合は処理を終了する
     if (triggerButtons.length === 0) {
         alert("トリガーが読み込まれていません\n色変更をスキップします");
-        console.warn("トリガーが読み込まれていません");
+        console.log("トリガーが読み込まれていません");
         return;
     }
 
@@ -423,7 +423,6 @@ let midiMapList = [];
 
 //MidiMessage受信時の処理
 function onMidiInput(channel, note) {
-
     //割当解除モードの場合
     if (isReleaseMode) {
         //midiMapListからnoteが一致するMidiMapを取得する
