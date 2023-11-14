@@ -24,6 +24,12 @@ Chromeの拡張機能ページ（[chrome://extensions/](chrome://extensions/)）
     - 保存：現在のプリセットを保存します。
     - 読み込み：プリセットを読み込みます。トリガーのJSONが読み込まれていない場合色変更は行いません。
 
+## 対応デバイス
+
+- APC mini mk2
+- Launchpad Mini MK3 ([プログラマーモード](https://fael-downloads-prod.focusrite.com/customer/prod/s3fs-public/downloads/Launchpad%20Mini%20User%20Guide%20JP.pdf#page=18)へ変更すること)
+- その他MIDIデバイス (色変更は非対応)
+
 ## 問い合わせ
 
 [Discordサーバー](https://discord.gg/Wz24z35FNu)の制作物カテゴリにお願いします。

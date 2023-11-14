@@ -13,15 +13,16 @@ class MidiDevice {
         if(this.inputName === undefined || this.outputName === undefined)
             throw new Error("inputNameかoutputNameが定義されていません。");
 
-        return this.inputName === inputName && this.outputName === outputName;
+        //引数のinputNameとoutputNameがthisと部分一致しているかを正規表現で確認し、一致していればtrueを返す
+        return inputName.match(`^${this.inputName}.*`) !== null && outputName.match(`^${this.outputName}.*`) !== null;
     }
 
     //Midiデバイスを取得する
     static async getMidiDeviceList() {
         const midiDeviceList = [];
-        const devices = await navigator.requestMIDIAccess().then(access => access);
-        const inputs = devices.inputs;
-        const outputs = devices.outputs;
+        const midiAccess = await navigator.requestMIDIAccess().then(access => access);
+        const inputs = midiAccess.inputs;
+        const outputs = midiAccess.outputs;
 
         inputs.forEach(input => {
             outputs.forEach(output => {
