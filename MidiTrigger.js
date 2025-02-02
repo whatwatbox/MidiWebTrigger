@@ -1,7 +1,7 @@
 //コントロールパネルの親要素のクラス名
-const controlPanelParentDivClassName = "sc-fUnMCh dOClzr";
+const controlPanelParentDivClassName = "sc-feUYzb ha-DaWC";
 //トリガーボタンの親要素のクラス名
-const triggerButtonParentDivClassName = "sc-eEbqID dTDMkX";
+const triggerButtonParentDivClassName = "sc-cNStQk YJSTD";
 
 //ページ更新時
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
@@ -423,6 +423,7 @@ let midiMapList = [];
 
 //MidiMessage受信時の処理
 function onMidiInput(channel, note) {
+    console.log("受信 #" + channel + " " + note);
     //割当解除モードの場合
     if (isReleaseMode) {
         //midiMapListからnoteが一致するMidiMapを取得する

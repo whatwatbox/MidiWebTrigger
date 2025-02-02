@@ -32,4 +32,4 @@ Chromeの拡張機能ページ（[chrome://extensions/](chrome://extensions/)）
 
 ## 問い合わせ
 
-[Discordサーバー](https://discord.gg/Wz24z35FNu)の制作物カテゴリにお願いします。
+[WATBOX公式X](https://x.com/wat_box)のDMにお願いします。
