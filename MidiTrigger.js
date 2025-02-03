@@ -1,20 +1,17 @@
-//コントロールパネルの親要素のクラス名
-const controlPanelParentDivClassName = "sc-feUYzb ha-DaWC";
-//トリガーボタンの親要素のクラス名
-const triggerButtonParentDivClassName = "sc-cNStQk YJSTD";
+//コントロールパネルの親要素のXPath
+const controlPanelParentDivXPath = "/html/body/div[1]/main/div[2]/div";
+//トリガーボタンの親要素のXPath
+const triggerButtonParentDivXPath = "/html/body/div[1]/main/div[2]/div/div[4]";
 
 //ページ更新時
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse)
-{
-    if(request.message != 'updatePage')
-    {
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.message != 'updatePage') {
         //sendResponse('otherMessage:' + request.message);
         return;
     }
 
     //現在のベージがトリガー制御("https://cluster.mu/e/*/trigger")(*は任意の文字列)でなかった場合は処理を終了する
-    if(!location.href.match(/^https:\/\/cluster\.mu\/e\/.+\/trigger$/))
-    {
+    if (!location.href.match(/^https:\/\/cluster\.mu\/e\/.+\/trigger$/)) {
         //sendResponse('notTriggerControlPage');
         return;
     }
@@ -30,9 +27,9 @@ function onPageUpdate() {
 
     //ページ内にis_setupという要素があるか確認する
     const isSetupElement = document.querySelector("div[class^='is_setup']");
-    
+
     //controlPanelDivがある場合は無視する
-    if(isSetupElement != null)
+    if (isSetupElement != null)
         return;
 
     //is_setupという要素を追加する
@@ -56,8 +53,8 @@ function onPageUpdate() {
 //初期化
 function initialize() {
     //コントロールパネルの親要素を取得
-    const controlPanelParentDiv = document.querySelector(`div[class^="${controlPanelParentDivClassName}"]`);
-
+    const controlPanelParentDiv = getElementByXPath(controlPanelParentDivXPath);
+    
     //-----------------------　コントロールパネル　-----------------------
 
     //コントロールパネルの表示・非表示を切り替えるためのボタンを追加する
@@ -187,7 +184,7 @@ function initialize() {
     //-----------------------　トリガーボタン監視　-----------------------
 
     //トリガーボタンの親要素を取得
-    const triggerButtonParentDiv = document.querySelector(`div[class^="${triggerButtonParentDivClassName}"]`);
+    const triggerButtonParentDiv = getElementByXPath(triggerButtonParentDivXPath);
 
     //triggerButtonParentDivの更新を監視する
     const observer = new MutationObserver((mutations) => {
@@ -197,6 +194,23 @@ function initialize() {
 
     //triggerButtonParentDivの更新を監視する
     observer.observe(triggerButtonParentDiv, { childList: true });
+}
+
+/**
+ * 指定された XPath に一致する最初の要素を取得します。
+ *
+ * @param {string} xpathExpression - 取得対象の XPath 式
+ * @returns {Node|null} - 見つかった要素、存在しない場合は null
+ */
+function getElementByXPath(xpathExpression) {
+    const result = document.evaluate(
+        xpathExpression,       // XPath 式
+        document,              // コンテキストノード
+        null,                  // namespaceResolver（不要な場合は null）
+        XPathResult.FIRST_ORDERED_NODE_TYPE, // 最初の一致ノードを取得
+        null                   // 既存の XPathResult（新規作成の場合は null）
+    );
+    return result.singleNodeValue;
 }
 
 let midiDevices = [];
