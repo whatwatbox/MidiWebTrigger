@@ -21,8 +21,10 @@ class OtherDevice extends MidiDevice {
         //Velocityを取得する
         const velocity = midiMessage[2];
 
-        //NoteOnかVelocityが0でない場合は呼び出す
-        if(isNoteOn || velocity !== 0)
+        //console.log(`MidiInputRaw: ${event.data}, note: ${note}, channel: ${channel}, isNoteOn: ${isNoteOn}, velocity: ${velocity}`);
+
+        //NoteOnの場合は呼び出す
+        if(isNoteOn)
         {
             //親クラスのonMidiInputがundefinedでない場合は呼び出す
             if(this.onMidiInput != null)
